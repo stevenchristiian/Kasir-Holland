@@ -16,285 +16,130 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-  .container {
-    max-width: 640px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  header {
-    text-align: center;
-    padding: 8px 0 4px;
-  }
-  header h1 {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 0 0 4px;
-  }
-  header p {
-    font-size: 13px;
-    color: #6b6b6b;
-    margin: 0;
-  }
-  .card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 16px;
-    border: 1px solid #e7e5e4;
-  }
-  .card-title {
-    font-size: 14px;
-    font-weight: 600;
-    margin: 0 0 12px;
-    color: #1c1c1b;
-  }
-  label {
-    font-size: 12px;
-    color: #6b6b6b;
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
+  .container { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  header { text-align: center; padding: 8px 0 4px; }
+  header h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
+  header p { font-size: 13px; color: #6b6b6b; margin: 0; }
+  .card { background: #fff; border-radius: 12px; padding: 16px; border: 1px solid #e7e5e4; }
+  .card-title { font-size: 14px; font-weight: 600; margin: 0 0 12px; color: #1c1c1b; }
+  label { font-size: 12px; color: #6b6b6b; display: block; margin-bottom: 6px; font-weight: 500; }
   input, select, textarea {
-    width: 100%;
-    padding: 10px 12px;
-    font-size: 15px;
-    border: 1px solid #e0ddd9;
-    border-radius: 8px;
-    background: #fafaf9;
-    font-family: inherit;
-    color: #1c1c1b;
-    transition: border 0.15s;
+    width: 100%; padding: 10px 12px; font-size: 15px;
+    border: 1px solid #e0ddd9; border-radius: 8px; background: #fafaf9;
+    font-family: inherit; color: #1c1c1b; transition: border 0.15s;
   }
-  input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: #1c1c1b;
-    background: #fff;
-  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: #1c1c1b; background: #fff; }
   textarea { resize: vertical; min-height: 80px; }
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
   .field { min-width: 0; }
-  .income-row {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 8px;
+
+  /* Income block per payment method */
+  .income-method-block {
+    border: 1px solid #e7e5e4;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
   }
-  .income-row span {
-    font-size: 14px;
+  .income-method-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f4;
+    padding: 9px 12px;
+    border-bottom: 1px solid #e7e5e4;
+  }
+  .income-method-name {
+    font-size: 13px;
+    font-weight: 700;
     color: #1c1c1b;
+    letter-spacing: 0.01em;
+  }
+  .income-method-subtotal {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b6b6b;
+    font-variant-numeric: tabular-nums;
+  }
+  .income-sub-row {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 8px;
+    align-items: center;
+    padding: 7px 12px;
+    border-bottom: 1px solid #f5f5f4;
+  }
+  .income-sub-row:last-child { border-bottom: none; }
+  .income-sub-label {
+    font-size: 12px;
+    color: #6b6b6b;
     font-weight: 500;
   }
-  .expense-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 38px;
-    gap: 8px;
-    margin-bottom: 8px;
-    align-items: center;
-  }
+  .income-sub-row input { font-size: 14px; padding: 7px 10px; }
+
+  /* Expense */
+  .expense-row { display: grid; grid-template-columns: 1fr 1fr 38px; gap: 8px; margin-bottom: 8px; align-items: center; }
   .icon-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
-    border: 1px solid #e0ddd9;
-    background: #fafaf9;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: #b91c1c;
-    padding: 0;
-    transition: background 0.15s;
+    width: 38px; height: 38px; border-radius: 8px; border: 1px solid #e0ddd9;
+    background: #fafaf9; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; font-size: 18px; color: #b91c1c; padding: 0; transition: background 0.15s;
   }
   .icon-btn:active { background: #fee2e2; }
   .add-btn {
-    font-size: 14px;
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: 1px dashed #b4b2a9;
-    background: transparent;
-    cursor: pointer;
-    color: #1c1c1b;
-    margin-top: 6px;
-    width: 100%;
-    font-family: inherit;
-    transition: background 0.15s;
+    font-size: 14px; padding: 8px 14px; border-radius: 8px; border: 1px dashed #b4b2a9;
+    background: transparent; cursor: pointer; color: #1c1c1b; margin-top: 6px;
+    width: 100%; font-family: inherit; transition: background 0.15s;
   }
   .add-btn:active { background: #f0eeec; }
-  .summary {
-    background: #1c1c1b;
-    color: #fafaf9;
-    border-radius: 12px;
-    padding: 16px;
-  }
-  .sum-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 0;
-    font-size: 14px;
-  }
-  .sum-row.total {
-    border-top: 1px solid rgba(255,255,255,0.2);
-    margin-top: 10px;
-    padding-top: 14px;
-    font-size: 17px;
-    font-weight: 600;
-  }
+
+  /* Summary */
+  .summary { background: #1c1c1b; color: #fafaf9; border-radius: 12px; padding: 16px; }
+  .sum-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; }
+  .sum-row.total { border-top: 1px solid rgba(255,255,255,0.2); margin-top: 10px; padding-top: 14px; font-size: 17px; font-weight: 600; }
+  .sum-section-title { font-size: 11px; opacity: 0.5; text-transform: uppercase; letter-spacing: 0.06em; padding-top: 10px; display: block; }
   .sum-label { opacity: 0.7; }
   .sum-val { font-variant-numeric: tabular-nums; font-weight: 500; }
-  .actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
+  .sum-sub { display: flex; justify-content: space-between; padding: 3px 0; font-size: 12px; opacity: 0.6; padding-left: 12px; }
+
+  /* Buttons */
+  .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .actions-full { display: grid; grid-template-columns: 1fr; gap: 10px; }
-  .btn {
-    font-size: 15px;
-    padding: 13px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 500;
-    border: 1px solid;
-    font-family: inherit;
-    transition: all 0.15s;
-  }
-  .btn-primary {
-    background: #1c1c1b;
-    color: #fafaf9;
-    border-color: #1c1c1b;
-  }
+  .btn { font-size: 15px; padding: 13px 16px; border-radius: 10px; cursor: pointer; font-weight: 500; border: 1px solid; font-family: inherit; transition: all 0.15s; }
+  .btn-primary { background: #1c1c1b; color: #fafaf9; border-color: #1c1c1b; }
   .btn-primary:active { transform: scale(0.98); }
-  .btn-secondary {
-    background: #fff;
-    color: #1c1c1b;
-    border-color: #e0ddd9;
-  }
+  .btn-secondary { background: #fff; color: #1c1c1b; border-color: #e0ddd9; }
   .btn-secondary:active { background: #f5f5f4; }
-  .btn-success {
-    background: #16a34a;
-    color: #fff;
-    border-color: #16a34a;
-  }
-  .btn-wa {
-    background: #25d366;
-    color: #fff;
-    border-color: #25d366;
-  }
+  .btn-wa { background: #25d366; color: #fff; border-color: #25d366; }
+
+  /* Toast */
   .toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 20px;
-    border-radius: 10px;
-    background: #16a34a;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s, transform 0.2s;
-    z-index: 100;
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    padding: 12px 20px; border-radius: 10px; background: #16a34a; color: #fff;
+    font-size: 14px; font-weight: 500; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; z-index: 100;
   }
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-4px);
-  }
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    z-index: 50;
-  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+
+  /* Modal */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
   .modal-overlay.show { display: flex; }
-  .modal {
-    background: #fff;
-    border-radius: 14px;
-    width: 100%;
-    max-width: 520px;
-    max-height: 85vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .modal-header {
-    padding: 14px 16px;
-    border-bottom: 1px solid #e7e5e4;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  .modal { background: #fff; border-radius: 14px; width: 100%; max-width: 520px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; }
+  .modal-header { padding: 14px 16px; border-bottom: 1px solid #e7e5e4; display: flex; justify-content: space-between; align-items: center; }
   .modal-header h3 { margin: 0; font-size: 16px; font-weight: 600; }
-  .modal-body {
-    padding: 16px;
-    overflow-y: auto;
-    flex: 1;
-  }
-  .preview {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 12px;
-    white-space: pre-wrap;
-    background: #f5f5f4;
-    padding: 14px;
-    border-radius: 8px;
-    margin: 0 0 12px;
-  }
-  .modal-actions {
-    padding: 12px 16px;
-    border-top: 1px solid #e7e5e4;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .close-btn {
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #6b6b6b;
-    padding: 0;
-    width: 32px;
-    height: 32px;
-    line-height: 1;
-  }
-  .history-item {
-    padding: 12px;
-    border: 1px solid #e7e5e4;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    cursor: pointer;
-  }
+  .modal-body { padding: 16px; overflow-y: auto; flex: 1; }
+  .preview { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; white-space: pre-wrap; background: #f5f5f4; padding: 14px; border-radius: 8px; margin: 0 0 12px; }
+  .modal-actions { padding: 12px 16px; border-top: 1px solid #e7e5e4; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .close-btn { background: transparent; border: none; font-size: 24px; cursor: pointer; color: #6b6b6b; padding: 0; width: 32px; height: 32px; line-height: 1; }
+  .history-item { padding: 12px; border: 1px solid #e7e5e4; border-radius: 8px; margin-bottom: 8px; cursor: pointer; }
   .history-item:active { background: #f5f5f4; }
-  .history-meta {
-    font-size: 12px;
-    color: #6b6b6b;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 4px;
-  }
-  .history-total {
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .empty-state {
-    text-align: center;
-    padding: 32px 16px;
-    color: #6b6b6b;
-    font-size: 14px;
-  }
+  .history-meta { font-size: 12px; color: #6b6b6b; display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .history-total { font-size: 15px; font-weight: 600; }
+  .empty-state { text-align: center; padding: 32px 16px; color: #6b6b6b; font-size: 14px; }
+
   @media (max-width: 480px) {
     .row-3 { grid-template-columns: 1fr; }
-    .income-row { grid-template-columns: 90px 1fr; }
     .actions { grid-template-columns: 1fr; }
+    .income-sub-row { grid-template-columns: 60px 1fr; }
   }
 </style>
 </head>
@@ -307,6 +152,7 @@
     <p id="todayLabel"></p>
   </header>
 
+  <!-- Informasi Shift -->
   <div class="card">
     <p class="card-title">Informasi shift</p>
     <div class="row" style="margin-bottom: 10px;">
@@ -343,29 +189,29 @@
     </div>
   </div>
 
+  <!-- Pemasukan -->
   <div class="card">
     <p class="card-title">Pemasukan</p>
     <div id="incomeList"></div>
   </div>
 
+  <!-- Pengeluaran -->
   <div class="card">
     <p class="card-title">Pengeluaran</p>
     <div id="expenseList"></div>
     <button class="add-btn" id="addExpense">+ Tambah pengeluaran</button>
   </div>
 
+  <!-- Catatan -->
   <div class="card">
     <p class="card-title">Catatan tambahan</p>
     <textarea id="catatan" placeholder="Cancel order, kurang input, dll..."></textarea>
   </div>
 
-  <div class="summary">
-    <div class="sum-row"><span class="sum-label">Total pemasukan</span><span class="sum-val" id="sumIn">Rp 0</span></div>
-    <div class="sum-row"><span class="sum-label">Total pengeluaran</span><span class="sum-val" id="sumOut">Rp 0</span></div>
-    <div class="sum-row"><span class="sum-label">Cash setelah pengeluaran</span><span class="sum-val" id="sumCash">Rp 0</span></div>
-    <div class="sum-row total"><span>Total pendapatan</span><span class="sum-val" id="sumTotal">Rp 0</span></div>
-  </div>
+  <!-- Summary -->
+  <div class="summary" id="summaryBox"></div>
 
+  <!-- Actions -->
   <div class="actions">
     <button class="btn btn-secondary" id="btnHistory">Riwayat</button>
     <button class="btn btn-secondary" id="btnReset">Reset form</button>
@@ -383,6 +229,7 @@
 
 </div>
 
+<!-- Preview Modal -->
 <div class="modal-overlay" id="previewModal">
   <div class="modal">
     <div class="modal-header">
@@ -399,6 +246,7 @@
   </div>
 </div>
 
+<!-- History Modal -->
 <div class="modal-overlay" id="historyModal">
   <div class="modal">
     <div class="modal-header">
@@ -418,13 +266,17 @@
 <script>
 (function() {
   // ====== KONFIGURASI ======
-  // Ganti URL ini dengan URL Web App dari Google Apps Script setelah deploy
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxmMRW_O7nKSSodYp4_4GW54fUUVLpy7MQepteQOiwhiY9YYqa7E61FPCyRta54rz5NAg/exec';
   // =========================
 
   const STORAGE_KEY = 'rekap_kasir_data';
   const PENDING_KEY = 'rekap_kasir_pending';
-  const incomeMethods = ['Cash', 'Gojek', 'Grab', 'Shopee', 'Gopay', 'BPR'];
+  const WA_KEY = 'rekap_kasir_wa';
+
+  // Struktur: metode pembayaran → sub-kategori produk
+  const PAYMENT_METHODS = ['Cash', 'Gojek', 'Grab', 'Shopee', 'Gopay', 'BPR'];
+  const SUB_CATS = ['Holland', 'Jus', 'Pukis'];
+
   const incomeList = document.getElementById('incomeList');
   const expenseList = document.getElementById('expenseList');
 
@@ -435,17 +287,39 @@
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
   });
 
-  // Build income rows
-  incomeMethods.forEach(method => {
-    const row = document.createElement('div');
-    row.className = 'income-row';
-    row.innerHTML = `
-      <span>${method}</span>
-      <input type="number" class="income-input" data-method="${method}" placeholder="0" min="0" step="1000" inputmode="numeric" />
+  // ============ BUILD INCOME FORM ============
+  PAYMENT_METHODS.forEach(method => {
+    const block = document.createElement('div');
+    block.className = 'income-method-block';
+    block.dataset.method = method;
+
+    // Header
+    const header = document.createElement('div');
+    header.className = 'income-method-header';
+    header.innerHTML = `
+      <span class="income-method-name">${method}</span>
+      <span class="income-method-subtotal" id="subtotal-${method}">Rp 0</span>
     `;
-    incomeList.appendChild(row);
+    block.appendChild(header);
+
+    // Sub-rows
+    SUB_CATS.forEach(sub => {
+      const row = document.createElement('div');
+      row.className = 'income-sub-row';
+      const inputId = `income-${method}-${sub}`;
+      row.innerHTML = `
+        <label class="income-sub-label" for="${inputId}">${sub}</label>
+        <input type="number" id="${inputId}" class="income-input"
+          data-method="${method}" data-sub="${sub}"
+          placeholder="0" min="0" step="1000" inputmode="numeric" />
+      `;
+      block.appendChild(row);
+    });
+
+    incomeList.appendChild(block);
   });
 
+  // ============ EXPENSE ============
   function addExpenseRow(name = '', amount = '') {
     const row = document.createElement('div');
     row.className = 'expense-row';
@@ -455,10 +329,7 @@
       <button class="icon-btn remove-exp" title="Hapus">×</button>
     `;
     expenseList.appendChild(row);
-    row.querySelector('.remove-exp').addEventListener('click', () => {
-      row.remove();
-      recalc();
-    });
+    row.querySelector('.remove-exp').addEventListener('click', () => { row.remove(); recalc(); });
     row.querySelectorAll('input').forEach(i => i.addEventListener('input', recalc));
   }
   addExpenseRow();
@@ -470,36 +341,84 @@
 
   const fmt = n => 'Rp ' + (Math.round(n) || 0).toLocaleString('id-ID');
 
+  // ============ RECALC ============
   function recalc() {
-    let totalIn = 0, cash = 0;
-    document.querySelectorAll('.income-input').forEach(i => {
-      const v = parseFloat(i.value) || 0;
-      totalIn += v;
-      if (i.dataset.method === 'Cash') cash = v;
+    let grandTotalIn = 0;
+    let cashTotal = 0;
+
+    // Per-method subtotals
+    PAYMENT_METHODS.forEach(method => {
+      let methodTotal = 0;
+      SUB_CATS.forEach(sub => {
+        const el = document.getElementById(`income-${method}-${sub}`);
+        methodTotal += parseFloat(el.value) || 0;
+      });
+      grandTotalIn += methodTotal;
+      if (method === 'Cash') cashTotal = methodTotal;
+      const subtotalEl = document.getElementById(`subtotal-${method}`);
+      if (subtotalEl) subtotalEl.textContent = fmt(methodTotal);
     });
+
     let totalOut = 0;
     document.querySelectorAll('.exp-amount').forEach(i => {
       totalOut += parseFloat(i.value) || 0;
     });
-    document.getElementById('sumIn').textContent = fmt(totalIn);
-    document.getElementById('sumOut').textContent = fmt(totalOut);
-    document.getElementById('sumCash').textContent = fmt(cash - totalOut);
-    document.getElementById('sumTotal').textContent = fmt(totalIn - totalOut);
+
+    const cashAfter = cashTotal - totalOut;
+    const grandTotal = grandTotalIn - totalOut;
+
+    // Render summary dinamis
+    const summaryBox = document.getElementById('summaryBox');
+    let html = `<span class="sum-section-title">Ringkasan Pemasukan</span>`;
+
+    PAYMENT_METHODS.forEach(method => {
+      let methodTotal = 0;
+      const subs = [];
+      SUB_CATS.forEach(sub => {
+        const v = parseFloat(document.getElementById(`income-${method}-${sub}`).value) || 0;
+        methodTotal += v;
+        subs.push({ sub, v });
+      });
+      if (methodTotal > 0) {
+        html += `<div class="sum-row"><span class="sum-label">${method}</span><span class="sum-val">${fmt(methodTotal)}</span></div>`;
+        subs.forEach(({ sub, v }) => {
+          if (v > 0) {
+            html += `<div class="sum-sub"><span>${sub}</span><span>${fmt(v)}</span></div>`;
+          }
+        });
+      }
+    });
+
+    html += `<div class="sum-row" style="border-top:1px solid rgba(255,255,255,0.15);margin-top:6px;padding-top:10px;">
+      <span class="sum-label">Total pemasukan</span><span class="sum-val">${fmt(grandTotalIn)}</span></div>`;
+    html += `<div class="sum-row"><span class="sum-label">Total pengeluaran</span><span class="sum-val">${fmt(totalOut)}</span></div>`;
+    html += `<div class="sum-row"><span class="sum-label">Cash setelah pengeluaran</span><span class="sum-val">${fmt(cashAfter)}</span></div>`;
+    html += `<div class="sum-row total"><span>Total Pendapatan</span><span class="sum-val">${fmt(grandTotal)}</span></div>`;
+
+    summaryBox.innerHTML = html;
   }
 
   document.querySelectorAll('.income-input').forEach(i => i.addEventListener('input', recalc));
+  recalc();
 
+  // ============ GATHER DATA ============
   function gatherData() {
+    // incomes: { Cash: { Holland: 0, Jus: 0, Pukis: 0 }, Gojek: {...}, ... }
     const incomes = {};
-    document.querySelectorAll('.income-input').forEach(i => {
-      incomes[i.dataset.method] = parseFloat(i.value) || 0;
+    PAYMENT_METHODS.forEach(method => {
+      incomes[method] = {};
+      SUB_CATS.forEach(sub => {
+        incomes[method][sub] = parseFloat(document.getElementById(`income-${method}-${sub}`).value) || 0;
+      });
     });
+
     const expenses = [];
     document.querySelectorAll('.expense-row').forEach(r => {
       const name = r.querySelector('.exp-name').value.trim();
       const amount = parseFloat(r.querySelector('.exp-amount').value) || 0;
       if (name || amount) expenses.push({ name: name || '(tanpa nama)', amount });
     });
+
     return {
       outlet: document.getElementById('outlet').value,
       kasir: document.getElementById('kasir').value.trim(),
@@ -513,11 +432,18 @@
     };
   }
 
+  // ============ BUILD REKAP TEXT ============
   function buildRekapText(data) {
-    const totalIn = Object.values(data.incomes).reduce((a, b) => a + b, 0);
-    const totalOut = data.expenses.reduce((a, b) => a + b.amount, 0);
-    const tgl = data.tanggal ? new Date(data.tanggal).toLocaleDateString('id-ID', {day:'numeric',month:'long',year:'numeric'}) : '-';
-    let lines = [];
+    const expenses = data.expenses || [];
+    const totalOut = expenses.reduce((a, b) => a + b.amount, 0);
+    const tgl = data.tanggal
+      ? new Date(data.tanggal + 'T00:00:00').toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+      : '-';
+
+    let grandTotalIn = 0;
+    let cashTotal = 0;
+    const lines = [];
+
     lines.push('*REKAP KASIR HARIAN*');
     lines.push(`Outlet  : ${data.outlet || '-'}`);
     lines.push(`Kasir   : ${data.kasir || '-'}`);
@@ -526,21 +452,32 @@
     lines.push(`Kas awal: ${fmt(data.kasAwal)}`);
     lines.push('');
     lines.push('*Pemasukan*');
-    Object.entries(data.incomes).forEach(([k, v]) => {
-      lines.push(`${k.padEnd(7)}: ${fmt(v)}`);
+
+    PAYMENT_METHODS.forEach(method => {
+      const subs = data.incomes[method] || {};
+      const methodTotal = SUB_CATS.reduce((s, sub) => s + (subs[sub] || 0), 0);
+      grandTotalIn += methodTotal;
+      if (method === 'Cash') cashTotal = methodTotal;
+
+      lines.push(`${method}: ${fmt(methodTotal)}`);
+      SUB_CATS.forEach(sub => {
+        const v = subs[sub] || 0;
+        lines.push(`  • ${sub}: ${fmt(v)}`);
+      });
     });
-    lines.push(`Total  : ${fmt(totalIn)}`);
+
+    lines.push(`Total   : ${fmt(grandTotalIn)}`);
     lines.push('');
     lines.push('*Pengeluaran*');
-    if (data.expenses.length) {
-      data.expenses.forEach(e => lines.push(`- ${e.name}: ${fmt(e.amount)}`));
+    if (expenses.length) {
+      expenses.forEach(e => lines.push(`- ${e.name}: ${fmt(e.amount)}`));
       lines.push(`Total: ${fmt(totalOut)}`);
     } else {
       lines.push('(tidak ada)');
     }
     lines.push('');
-    lines.push(`*Total Pendapatan: ${fmt(totalIn - totalOut)}*`);
-    lines.push(`Cash setelah pengeluaran: ${fmt((data.incomes.Cash || 0) - totalOut)}`);
+    lines.push(`*Total Pendapatan: ${fmt(grandTotalIn - totalOut)}*`);
+    lines.push(`Cash setelah pengeluaran: ${fmt(cashTotal - totalOut)}`);
     if (data.catatan) {
       lines.push('');
       lines.push(`Catatan: ${data.catatan}`);
@@ -548,95 +485,52 @@
     return lines.join('\n');
   }
 
-  // Storage
+  // ============ STORAGE ============
   function loadHistory() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
     catch { return []; }
   }
-  function saveHistory(arr) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+  function saveHistory(arr) { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+  function loadPending() {
+    try { return JSON.parse(localStorage.getItem(PENDING_KEY) || '[]'); }
+    catch { return []; }
   }
+  function savePending(arr) { localStorage.setItem(PENDING_KEY, JSON.stringify(arr)); }
 
   function showToast(msg) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
+    t.textContent = msg; t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
   }
 
   function openModal(id) { document.getElementById(id).classList.add('show'); }
   window.closeModal = id => document.getElementById(id).classList.remove('show');
 
-  // WhatsApp number persistence
-  const WA_KEY = 'rekap_kasir_wa';
+  // ============ WHATSAPP ============
   const waInput = document.getElementById('waNumber');
   waInput.value = localStorage.getItem(WA_KEY) || '';
-  waInput.addEventListener('input', () => {
-    localStorage.setItem(WA_KEY, waInput.value.trim());
-  });
+  waInput.addEventListener('input', () => localStorage.setItem(WA_KEY, waInput.value.trim()));
 
   function sendToWA(text) {
     const num = waInput.value.trim().replace(/\D/g, '');
-    const url = num
-      ? `https://wa.me/${num}?text=${encodeURIComponent(text)}`
-      : `https://wa.me/?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
+    window.open(num ? `https://wa.me/${num}?text=${encodeURIComponent(text)}` : `https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
   }
 
-  // Quick send to WA (validates + saves + syncs + opens WA)
-  document.getElementById('btnQuickWA').addEventListener('click', async () => {
-    const data = gatherData();
-    if (!data.outlet) { alert('Pilih outlet terlebih dahulu'); return; }
-    if (!data.kasir) { alert('Isi nama kasir'); return; }
-    const totalIn = Object.values(data.incomes).reduce((a, b) => a + b, 0);
-    if (totalIn === 0 && !confirm('Total pemasukan Rp 0. Tetap kirim?')) return;
-
-    const history = loadHistory();
-    history.unshift(data);
-    saveHistory(history);
-
-    // Sync ke sheet di background, jangan tunggu
-    syncToSheet(data).then(result => {
-      if (!result.ok && result.reason === 'network') {
-        const pending = loadPending();
-        pending.push(data);
-        savePending(pending);
-      }
-    });
-
-    const text = buildRekapText(data);
-    sendToWA(text);
-    showToast('Membuka WhatsApp...');
-  });
-
-  // Sync ke Google Sheets
+  // ============ SYNC TO SHEET ============
   async function syncToSheet(data) {
-    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'PASTE_URL_APPS_SCRIPT_DI_SINI') {
-      return { ok: false, reason: 'not_configured' };
-    }
+    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'PASTE_URL_APPS_SCRIPT_DI_SINI') return { ok: false, reason: 'not_configured' };
     try {
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors', // Apps Script perlu no-cors
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(data)
       });
-      // Dengan no-cors response opaque, jadi anggap sukses kalau tidak throw
       return { ok: true };
     } catch (err) {
       return { ok: false, reason: 'network', error: err.message };
     }
   }
 
-  function loadPending() {
-    try { return JSON.parse(localStorage.getItem(PENDING_KEY) || '[]'); }
-    catch { return []; }
-  }
-  function savePending(arr) {
-    localStorage.setItem(PENDING_KEY, JSON.stringify(arr));
-  }
-
-  // Auto-retry pending submissions saat online
   async function retryPending() {
     const pending = loadPending();
     if (!pending.length) return;
@@ -646,46 +540,42 @@
       if (!result.ok) remaining.push(item);
     }
     savePending(remaining);
-    if (pending.length > remaining.length) {
-      showToast(`${pending.length - remaining.length} rekap tersinkron`);
-    }
+    if (pending.length > remaining.length) showToast(`${pending.length - remaining.length} rekap tersinkron`);
   }
-
   window.addEventListener('online', retryPending);
   if (navigator.onLine) setTimeout(retryPending, 1000);
 
-  // Save
+  // ============ VALIDATE & SAVE ============
+  function validate(data) {
+    if (!data.outlet) { alert('Pilih outlet terlebih dahulu'); return false; }
+    if (!data.kasir) { alert('Isi nama kasir'); return false; }
+    const totalIn = PAYMENT_METHODS.reduce((s, m) => s + SUB_CATS.reduce((ss, sub) => ss + ((data.incomes[m] || {})[sub] || 0), 0), 0);
+    if (totalIn === 0 && !confirm('Total pemasukan Rp 0. Tetap simpan?')) return false;
+    return true;
+  }
+
   document.getElementById('btnSave').addEventListener('click', async () => {
     const data = gatherData();
-    if (!data.outlet) { alert('Pilih outlet terlebih dahulu'); return; }
-    if (!data.kasir) { alert('Isi nama kasir'); return; }
-    const totalIn = Object.values(data.incomes).reduce((a, b) => a + b, 0);
-    if (totalIn === 0 && !confirm('Total pemasukan Rp 0. Tetap simpan?')) return;
+    if (!validate(data)) return;
 
     const history = loadHistory();
     history.unshift(data);
     saveHistory(history);
 
-    // Sync ke Google Sheets
     const btn = document.getElementById('btnSave');
-    const originalText = btn.textContent;
-    btn.textContent = 'Mengirim...';
-    btn.disabled = true;
+    btn.textContent = 'Mengirim...'; btn.disabled = true;
 
     const result = await syncToSheet(data);
     if (!result.ok && result.reason === 'network') {
-      const pending = loadPending();
-      pending.push(data);
-      savePending(pending);
-      showToast('Offline - akan dikirim saat online');
+      const pending = loadPending(); pending.push(data); savePending(pending);
+      showToast('Offline — akan dikirim saat online');
     } else if (result.ok) {
       showToast('Tersimpan ke Google Sheets');
     } else {
-      showToast('Tersimpan lokal (Apps Script belum dikonfigurasi)');
+      showToast('Tersimpan lokal');
     }
 
-    btn.textContent = originalText;
-    btn.disabled = false;
+    btn.textContent = 'Simpan & lihat rekap'; btn.disabled = false;
 
     const text = buildRekapText(data);
     document.getElementById('previewText').textContent = text;
@@ -693,29 +583,43 @@
     openModal('previewModal');
   });
 
-  // Copy
+  document.getElementById('btnQuickWA').addEventListener('click', async () => {
+    const data = gatherData();
+    if (!validate(data)) return;
+
+    const history = loadHistory();
+    history.unshift(data);
+    saveHistory(history);
+
+    syncToSheet(data).then(result => {
+      if (!result.ok && result.reason === 'network') {
+        const pending = loadPending(); pending.push(data); savePending(pending);
+      }
+    });
+
+    const text = buildRekapText(data);
+    sendToWA(text);
+    showToast('Membuka WhatsApp...');
+  });
+
+  // ============ COPY ============
   document.getElementById('btnCopy').addEventListener('click', () => {
     const text = document.getElementById('previewText').dataset.text;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text).then(() => showToast('Tersalin ke clipboard'));
     } else {
       const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      ta.remove();
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove();
       showToast('Tersalin');
     }
   });
 
-  // WhatsApp from modal
   document.getElementById('btnWA').addEventListener('click', () => {
-    const text = document.getElementById('previewText').dataset.text;
-    sendToWA(text);
+    sendToWA(document.getElementById('previewText').dataset.text);
   });
 
-  // Reset
+  // ============ RESET ============
   document.getElementById('btnReset').addEventListener('click', () => {
     if (!confirm('Reset semua input?')) return;
     document.querySelectorAll('input[type="number"], input[type="text"], textarea').forEach(i => i.value = '');
@@ -728,7 +632,7 @@
     showToast('Form direset');
   });
 
-  // History
+  // ============ HISTORY ============
   document.getElementById('btnHistory').addEventListener('click', () => {
     const history = loadHistory();
     const body = document.getElementById('historyBody');
@@ -736,18 +640,17 @@
       body.innerHTML = '<div class="empty-state">Belum ada rekap tersimpan</div>';
     } else {
       body.innerHTML = history.map((d, idx) => {
-        const totalIn = Object.values(d.incomes).reduce((a, b) => a + b, 0);
-        const totalOut = d.expenses.reduce((a, b) => a + b.amount, 0);
-        const tgl = d.tanggal ? new Date(d.tanggal).toLocaleDateString('id-ID') : '-';
+        const totalIn = PAYMENT_METHODS.reduce((s, m) => s + SUB_CATS.reduce((ss, sub) => ss + ((d.incomes[m] || {})[sub] || 0), 0), 0);
+        const totalOut = (d.expenses || []).reduce((a, b) => a + b.amount, 0);
+        const tgl = d.tanggal ? new Date(d.tanggal + 'T00:00:00').toLocaleDateString('id-ID') : '-';
         return `
           <div class="history-item" data-idx="${idx}">
             <div class="history-meta">
-              <span>${escapeHtml(d.outlet)} • Shift ${d.shift} • ${tgl}</span>
-              <span>${escapeHtml(d.kasir)}</span>
+              <span>${escapeHtml(d.outlet || '-')} • Shift ${d.shift} • ${tgl}</span>
+              <span>${escapeHtml(d.kasir || '-')}</span>
             </div>
             <div class="history-total">${fmt(totalIn - totalOut)}</div>
-          </div>
-        `;
+          </div>`;
       }).join('');
       body.querySelectorAll('.history-item').forEach(el => {
         el.addEventListener('click', () => {
@@ -763,23 +666,37 @@
     openModal('historyModal');
   });
 
-  // Export CSV
+  // ============ EXPORT CSV ============
   document.getElementById('btnExportCSV').addEventListener('click', () => {
     const history = loadHistory();
     if (!history.length) { alert('Tidak ada data'); return; }
-    const headers = ['Tanggal','Outlet','Kasir','Shift','Kas Awal','Cash','Gojek','Grab','Shopee','Gopay','BPR','Total Pemasukan','Total Pengeluaran','Total Pendapatan','Detail Pengeluaran','Catatan'];
+
+    const headers = [
+      'Tanggal', 'Outlet', 'Kasir', 'Shift', 'Kas Awal',
+      ...PAYMENT_METHODS.flatMap(m => SUB_CATS.map(sub => `${m} - ${sub}`)),
+      ...PAYMENT_METHODS.map(m => `Total ${m}`),
+      'Total Pemasukan', 'Total Pengeluaran', 'Total Pendapatan',
+      'Detail Pengeluaran', 'Catatan'
+    ];
+
     const rows = history.map(d => {
-      const totalIn = Object.values(d.incomes).reduce((a, b) => a + b, 0);
-      const totalOut = d.expenses.reduce((a, b) => a + b.amount, 0);
-      const expDetail = d.expenses.map(e => `${e.name}: ${e.amount}`).join('; ');
+      const subVals = PAYMENT_METHODS.flatMap(m =>
+        SUB_CATS.map(sub => (d.incomes[m] || {})[sub] || 0)
+      );
+      const methodTotals = PAYMENT_METHODS.map(m =>
+        SUB_CATS.reduce((s, sub) => s + ((d.incomes[m] || {})[sub] || 0), 0)
+      );
+      const totalIn = methodTotals.reduce((a, b) => a + b, 0);
+      const totalOut = (d.expenses || []).reduce((a, b) => a + b.amount, 0);
+      const expDetail = (d.expenses || []).map(e => `${e.name}: ${e.amount}`).join('; ');
       return [
         d.tanggal, d.outlet, d.kasir, d.shift, d.kasAwal,
-        d.incomes.Cash || 0, d.incomes.Gojek || 0, d.incomes.Grab || 0,
-        d.incomes.Shopee || 0, d.incomes.Gopay || 0, d.incomes.BPR || 0,
+        ...subVals, ...methodTotals,
         totalIn, totalOut, totalIn - totalOut,
         expDetail, d.catatan || ''
       ].map(v => `"${String(v).replace(/"/g, '""')}"`).join(',');
     });
+
     const csv = [headers.join(','), ...rows].join('\n');
     const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -790,7 +707,7 @@
     URL.revokeObjectURL(url);
   });
 
-  // Clear history
+  // ============ CLEAR HISTORY ============
   document.getElementById('btnClearHistory').addEventListener('click', () => {
     if (!confirm('Hapus semua riwayat? Tidak bisa dikembalikan.')) return;
     saveHistory([]);
@@ -800,12 +717,9 @@
 
   // Close modal on overlay click
   document.querySelectorAll('.modal-overlay').forEach(m => {
-    m.addEventListener('click', e => {
-      if (e.target === m) m.classList.remove('show');
-    });
+    m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); });
   });
 
-  recalc();
 })();
 </script>
 </body>
