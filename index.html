@@ -136,6 +136,50 @@
   .history-total { font-size: 15px; font-weight: 600; }
   .empty-state { text-align: center; padding: 32px 16px; color: #6b6b6b; font-size: 14px; }
 
+  /* Generate section */
+  .generate-card {
+    background: #1c1c1b;
+    border-radius: 12px;
+    padding: 16px;
+    border: none;
+  }
+  .generate-card .card-title { color: #fff; margin-bottom: 10px; }
+  .generate-subtitle { font-size: 12px; color: rgba(255,255,255,0.5); margin: 0 0 12px; }
+  .generate-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; }
+  .generate-row select {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  .generate-row select option { background: #1c1c1b; color: #fff; }
+  .btn-generate {
+    background: #fff;
+    color: #1c1c1b;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+    transition: opacity 0.15s;
+  }
+  .btn-generate:active { opacity: 0.8; }
+  .btn-generate:disabled { opacity: 0.5; cursor: not-allowed; }
+  .generate-status {
+    font-size: 12px;
+    margin-top: 8px;
+    color: rgba(255,255,255,0.6);
+    min-height: 18px;
+    text-align: center;
+  }
+  .generate-status.ok { color: #4ade80; }
+  .generate-status.err { color: #f87171; }
+
   @media (max-width: 480px) {
     .row-3 { grid-template-columns: 1fr; }
     .actions { grid-template-columns: 1fr; }
@@ -146,6 +190,19 @@
 <body>
 
 <div class="container">
+
+  <!-- Generate Rangkuman -->
+  <div class="generate-card">
+    <p class="card-title">Generate Rangkuman Per Outlet</p>
+    <p class="generate-subtitle">Pilih tanggal → klik Generate → cek sheet "Per Outlet"</p>
+    <div class="generate-row">
+      <select id="generateDate">
+        <option value="">Memuat tanggal...</option>
+      </select>
+      <button class="btn-generate" id="btnGenerate">Generate</button>
+    </div>
+    <div class="generate-status" id="generateStatus"></div>
+  </div>
 
   <header>
     <h1>Rekap Kasir Harian</h1>
@@ -505,6 +562,59 @@
 
   function openModal(id) { document.getElementById(id).classList.add('show'); }
   window.closeModal = id => document.getElementById(id).classList.remove('show');
+
+  // ============ GENERATE RANGKUMAN PER TANGGAL ============
+
+  async function loadAvailableDates() {
+    const sel = document.getElementById('generateDate');
+    try {
+      const res = await fetch(APPS_SCRIPT_URL + '?action=dates', { method: 'GET' });
+      const json = await res.json();
+      if (json.status === 'success' && json.dates && json.dates.length) {
+        sel.innerHTML = json.dates.map(d => {
+          const label = new Date(d + 'T00:00:00').toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
+          return `<option value="${d}">${label}</option>`;
+        }).join('');
+      } else {
+        sel.innerHTML = '<option value="">Belum ada data</option>';
+      }
+    } catch (e) {
+      sel.innerHTML = '<option value="">Gagal memuat tanggal</option>';
+    }
+  }
+
+  document.getElementById('btnGenerate').addEventListener('click', async () => {
+    const date = document.getElementById('generateDate').value;
+    const status = document.getElementById('generateStatus');
+    const btn = document.getElementById('btnGenerate');
+    if (!date) { status.textContent = 'Pilih tanggal dulu'; status.className = 'generate-status err'; return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Memproses...';
+    status.textContent = 'Menghubungi server...';
+    status.className = 'generate-status';
+
+    try {
+      const res = await fetch(APPS_SCRIPT_URL + '?action=generateDaily&tanggal=' + date);
+      const json = await res.json();
+      if (json.status === 'success') {
+        status.textContent = '✓ Rangkuman ' + new Date(date + 'T00:00:00').toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) + ' berhasil di-generate di sheet "Per Outlet"';
+        status.className = 'generate-status ok';
+      } else {
+        status.textContent = '✗ Error: ' + (json.message || 'Unknown error');
+        status.className = 'generate-status err';
+      }
+    } catch (e) {
+      status.textContent = '✗ Gagal terhubung ke server';
+      status.className = 'generate-status err';
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Generate';
+  });
+
+  // Load tanggal saat halaman dibuka
+  loadAvailableDates();
 
   // ============ WHATSAPP ============
   const waInput = document.getElementById('waNumber');
